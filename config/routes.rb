@@ -4,5 +4,5 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
   
-  root 'store#index'  
+  root 'instruments#index'  
 end
