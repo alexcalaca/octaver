@@ -1,21 +1,17 @@
 class InstrumentsController < ApplicationController
   before_action :set_instrument, only: %i[ show edit update destroy ]
 
-  # GET /instruments or /instruments.json
   def index
-    @instruments = Instrument.all
+    @instruments = Instrument.all.order("created_at desc")
   end
-
-  # GET /instruments/1 or /instruments/1.json
+  
   def show
   end
-
-  # GET /instruments/new
+  
   def new
     @instrument = Instrument.new
-  end
-
-  # GET /instruments/1/edit
+  end 
+  
   def edit
   end
 
@@ -65,6 +61,8 @@ class InstrumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def instrument_params
-      params.require(:instrument).permit(:brand, :model, :description, :condition, :finish, :title, :price)
+      params.require(:instrument).permit(:brand, :model,
+                                          :description, :condition,
+                                          :finish, :title, :price, :image )
     end
 end
