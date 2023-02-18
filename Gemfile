@@ -29,6 +29,7 @@ group :development, :test do
   gem 'guard', '~> 2.14', '>= 2.14.1'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do  
