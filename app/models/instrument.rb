@@ -23,10 +23,34 @@ class Instrument < ApplicationRecord
 
   #%w is a syntax sugar for arrays["", ""]
   BRAND = %w{ Fender Gibson Epiphone ESP Martin Dean Taylor Jackson PRS 
-              Ibanez Charvel Washburnhure Yamaha Steinway Sennheiser
-              Roland Kawai }
+    Ibanez Charvel Washburnhure Yamaha Steinway Sennheiser
+    Roland Kawai }
+
+  #%w is a syntax sugar for arrays["", ""]
+  CONDITION = %w{ New Excellent Mint Used Fair Poor }
+  
+  validates :brand, presence: true
+  validates :brand, inclusion: { in: BRAND }, allow_nil: true
+
+  validates :condition, inclusion: { in: CONDITION }, allow_nil: true
+  validates :condition, presence: true
+
+  validates :title, format: { with: /\A[a-zA-Z0-9_\- ]+\z/ }
+
+  
+  validates :model, presence: true
+  validates :description, presence: true
+  validates :finish, presence: true
+
+  
+
+  
+
+  
 
   FINISH = %w{ Black White Navy Blue Red Clear Satin Yellow Seafoam }
 
-  CONDITION = %w{ New Excellent Mint Used Fair Poor }
+  
+
+  
 end
