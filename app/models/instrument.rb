@@ -20,6 +20,7 @@ class Instrument < ApplicationRecord
   serialize :image, JSON # It is used because of sqlite
 
   belongs_to :user, optional: true
+  has_many :line_items
 
   #%w is a syntax sugar for arrays["", ""]
   BRAND = %w{ Fender Gibson Epiphone ESP Martin Dean Taylor Jackson PRS 
