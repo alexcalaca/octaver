@@ -1,5 +1,6 @@
 class InstrumentsController < ApplicationController
   before_action :set_instrument, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @instruments = Instrument.all.order("created_at desc")
