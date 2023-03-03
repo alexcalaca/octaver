@@ -15,9 +15,8 @@ class InstrumentsController < ApplicationController
   def edit
   end
 
-  # POST /instruments or /instruments.json
   def create
-    @instrument = Instrument.new(instrument_params)
+    @instrument = current_user.instrument.new(instrument_params)
 
     respond_to do |format|
       if @instrument.save
