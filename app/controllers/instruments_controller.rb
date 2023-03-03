@@ -30,7 +30,6 @@ class InstrumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /instruments/1 or /instruments/1.json
   def update
     respond_to do |format|
       if @instrument.update(instrument_params)
@@ -43,7 +42,6 @@ class InstrumentsController < ApplicationController
     end
   end
 
-  # DELETE /instruments/1 or /instruments/1.json
   def destroy
     @instrument.destroy
 
@@ -54,12 +52,10 @@ class InstrumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_instrument
       @instrument = Instrument.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def instrument_params
       params.require(:instrument).permit(:brand, :model,
                                           :description, :condition,
