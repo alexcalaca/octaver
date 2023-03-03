@@ -17,9 +17,9 @@ class LineItemsController < ApplicationController
   def edit
   end
 
-  # POST /line_items or /line_items.json
-  def create
-    @line_item = LineItem.new(line_item_params)
+  def create  
+    instrument = Instrument.find(params[:instrument_id])
+    @line_item = @cart.add_instrument(instrument)
 
     respond_to do |format|
       if @line_item.save
@@ -30,9 +30,8 @@ class LineItemsController < ApplicationController
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end#
 
-  # PATCH/PUT /line_items/1 or /line_items/1.json
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
@@ -45,7 +44,6 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # DELETE /line_items/1 or /line_items/1.json
   def destroy
     @cart = Cart.find(session[:cart_id])
     @line_item.destroy
@@ -57,7 +55,6 @@ class LineItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])
     end
