@@ -15,7 +15,7 @@ class InstrumentsController < ApplicationController
   
   def edit
   end
-
+  
   def create
     @instrument = current_user.instrument.new(instrument_params)
 
@@ -29,7 +29,7 @@ class InstrumentsController < ApplicationController
       end
     end
   end
-
+  
   def update
     respond_to do |format|
       if @instrument.update(instrument_params)
@@ -41,7 +41,7 @@ class InstrumentsController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     @instrument.destroy
 
@@ -51,11 +51,11 @@ class InstrumentsController < ApplicationController
     end
   end
 
-  private
+  private    
     def set_instrument
       @instrument = Instrument.find(params[:id])
     end
-
+    
     def instrument_params
       params.require(:instrument).permit(:brand, :model,
                                           :description, :condition,
