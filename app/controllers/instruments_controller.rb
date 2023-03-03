@@ -1,5 +1,6 @@
 class InstrumentsController < ApplicationController
   before_action :set_instrument, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @instruments = Instrument.all.order("created_at desc")
@@ -14,10 +15,9 @@ class InstrumentsController < ApplicationController
   
   def edit
   end
-
-  # POST /instruments or /instruments.json
+  
   def create
-    @instrument = Instrument.new(instrument_params)
+    @instrument = current_user.instrument.new(instrument_params)
 
     respond_to do |format|
       if @instrument.save
@@ -29,8 +29,7 @@ class InstrumentsController < ApplicationController
       end
     end
   end
-
-  # PATCH/PUT /instruments/1 or /instruments/1.json
+  
   def update
     respond_to do |format|
       if @instrument.update(instrument_params)
@@ -42,8 +41,7 @@ class InstrumentsController < ApplicationController
       end
     end
   end
-
-  # DELETE /instruments/1 or /instruments/1.json
+  
   def destroy
     @instrument.destroy
 
@@ -53,13 +51,11 @@ class InstrumentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
+  private    
     def set_instrument
       @instrument = Instrument.find(params[:id])
     end
-
-    # Only allow a list of trusted parameters through.
+    
     def instrument_params
       params.require(:instrument).permit(:brand, :model,
                                           :description, :condition,

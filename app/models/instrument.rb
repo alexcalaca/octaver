@@ -20,14 +20,18 @@ class Instrument < ApplicationRecord
   serialize :image, JSON # It is used because of sqlite
 
   belongs_to :user, optional: true
+  has_many :line_items
 
   #%w is a syntax sugar for arrays["", ""]
   BRAND = %w{ Fender Gibson Epiphone ESP Martin Dean Taylor Jackson PRS 
     Ibanez Charvel Washburnhure Yamaha Steinway Sennheiser
-    Roland Kawai }
+    Roland Kawai Suhr }
 
   #%w is a syntax sugar for arrays["", ""]
   CONDITION = %w{ New Excellent Mint Used Fair Poor }
+
+  FINISH = %w{ Black White Navy Blue Red Clear Satin Yellow Seafoam }
+
   
   validates :brand, presence: true
   validates :brand, inclusion: { in: BRAND }, allow_nil: true
@@ -36,21 +40,9 @@ class Instrument < ApplicationRecord
   validates :condition, presence: true
 
   validates :title, format: { with: /\A[a-zA-Z0-9_\- ]+\z/ }
-
   
   validates :model, presence: true
   validates :description, presence: true
   validates :finish, presence: true
-
-  
-
-  
-
-  
-
-  FINISH = %w{ Black White Navy Blue Red Clear Satin Yellow Seafoam }
-
-  
-
   
 end
